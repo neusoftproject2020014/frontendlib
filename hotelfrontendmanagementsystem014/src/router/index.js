@@ -6,8 +6,11 @@ import CustomerMain from '../components/customer/customer.vue'
 import CustomerList from '../components/customer/list.vue'
 import CustomerCheckIn from '../components/customer/checkin.vue'
 
+import RoomMain from '../components/room/room.vue'
+import RoomList from '../components/room/list.vue'
+import RoomAdd from '../components/room/add.vue'
+
 import Product from '../components/product/product.vue'
-import Room from '../components/room/room.vue'
 import ReportForm from '../components/reportform/reportform.vue'
 
 Vue.use(VueRouter)
@@ -47,8 +50,24 @@ const routes = [
   },
   {
     path: '/room',
-    name: 'Room',
-    component: Room
+    name: 'roommain',
+    component: RoomMain,
+  	children:[
+  		{
+  			path:"list",
+  			name:"roomlist",
+  			component:RoomList
+  		},
+  		{
+  			path:"add",
+  			name:"roomaddn",
+  			component:RoomAdd
+  		},
+  		{
+  			path:"", redirect: "list"
+  		},
+  		
+  	]
   },
   {
     path: '/reportform',
