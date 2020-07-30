@@ -1,7 +1,7 @@
 <template>
 	<div class="room">
 		<div class="container">
-			<SearchBar></SearchBar>
+			<SearchBar :placeholder=searchPh></SearchBar>
 		    <table class="table">
 		      <caption><h3>酒店客房信息</h3></caption>
 		      <thead class="thead-dark">
@@ -32,7 +32,7 @@
 		        </tr>
 		      </tbody>
 		    </table>
-			<Form></Form>
+			<Form :formEntry=formEntrys></Form>
 		</div>
 		
 	</div>
@@ -45,7 +45,10 @@
 	export default {
 		name: "Room",
 		data(){
-			return {};
+			return {
+				formEntrys:[{name: '房间号', placeholder:'房间'}, {name: '密码',placeholder:'密码'}, {name: 'kkk'}],
+				searchPh:"ceshi"
+			};
 		},
 		components: {
 		  Form,
