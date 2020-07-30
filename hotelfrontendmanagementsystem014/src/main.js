@@ -6,7 +6,7 @@ import axios from "axios";
 
 const axiosJSON = axios.create({
   baseURL: 'http://localhost:8201/',
-  timeout: 2000  
+  timeout: 4000  
 });
 const axiosUpload = axios.create({
   baseURL: 'http://localhost:8201/',

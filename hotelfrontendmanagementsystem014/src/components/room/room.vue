@@ -32,7 +32,7 @@
 		        </tr>
 		      </tbody>
 		    </table>
-			<Form :formEntry=formEntrys></Form>
+			<Tip></Tip>
 		</div>
 		
 	</div>
@@ -41,7 +41,7 @@
 
 <script>
 	import SearchBar from '@/components/commons/searchbar.vue'
-	import Form from '@/components/commons/form.vue'
+	import Tip from '@/components/commons/tip.vue'
 	export default {
 		name: "Room",
 		data(){
@@ -51,7 +51,7 @@
 			};
 		},
 		components: {
-		  Form,
+		  Tip,
 		  SearchBar
 		}
 	}

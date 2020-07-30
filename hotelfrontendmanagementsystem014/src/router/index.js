@@ -5,6 +5,8 @@ import Home from '../components/home/home.vue'
 import CustomerMain from '../components/customer/customer.vue'
 import CustomerList from '../components/customer/list.vue'
 import CustomerCheckIn from '../components/customer/checkin.vue'
+import CustomerModify from '../components/customer/modify.vue'
+import CustomerView from '../components/customer/view.vue'
 
 import Product from '../components/product/product.vue'
 import Room from '../components/room/room.vue'
@@ -33,6 +35,18 @@ const routes = [
 			path:"checkin",
 			name:"customercheckin",
 			component:CustomerCheckIn
+		},
+		{
+			path:"modify/:id",
+			name:"customermodify",
+			component:CustomerModify,
+			props:true
+		},
+		{
+			path:"view/:id",
+			name:"customerview",
+			component:CustomerView,
+			props:true
 		},
 		{
 			path:"", redirect: "list"

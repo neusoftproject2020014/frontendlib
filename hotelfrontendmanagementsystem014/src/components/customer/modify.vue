@@ -1,5 +1,5 @@
 <template>
-	<form method="post" v-on:submit.prevent="checkin()">
+	<form method="post" v-on:submit.prevent="modify()">
 	    <div class="form-group row">
 	      <label for="inputEmail3" class="col-sm-2 col-form-label">姓名</label>
 	      <div class="col-sm-4">
@@ -36,55 +36,66 @@
 		  </div>
 		</div>
 		<div class="form-group row">
-		  <label for="inputEmail3" class="col-sm-2 col-form-label">房间号</label>
+		  <label for="inputEmail3" class="col-sm-2 col-form-label">房号</label>
 		  <div class="col-sm-4">
 		    <input type="text" class="form-control" 
-				id="input" placeholder="房间号" v-model="customer.rid">
+				id="input" placeholder="房号" v-model="customer.rid">
 		  </div>
 		</div>
 	  <div class="form-group row">
 	    <div class="col-sm-2">
-	      <button type="submit" class="btn btn-primary">提交入住</button>
+	      <button type="submit" class="btn btn-primary">提交更改</button>
 	    </div>
 		<div class="col-sm-2">
-		  <router-link to="/customer" class="btn btn-primary">返回</router-link>
+		  <router-link to="/customer" class="btn btn-primary">取消</router-link>
 		</div>
 	  </div>
 	</form>
 </template>
 
 <script>
+	//修改顾客信息
 	export default {
-		name: "CustomerCheckIn",
+		name:"CustomerModify",
 		data(){
 			return {
 				customer:{
-					name:"",
-					id:"",
-					gender:"",
-					age:"",
-					phone:"",
-					rid:"",
 				},
-			}
+			};
+		},
+		props:{
+			id:{
+				required:true,
+			}			
+		},
+		created(){ //组件的创建生命周期函数
+			this.getCustomer();
+			
 		},
 		methods:{
-			checkin(){
+			getCustomer(id){
+				this.axiosJSON.get("/customer/get", {
+					params:{
+						id:this.id				
+					}
+				}).then(result=>{
+					this.customer=result.data.data.object;
+				});
+			},
+			modify(){
 				console.log(this.customer)
-				this.axiosJSON.post("/customer/checkin",this.customer).then(result=>{
-					let resultData = result.data;
-					console.log(resultData)
-					if(resultData.status.status=="OK"){
-						alert(resultData.status.message);
-						this.$router.push("/customer"); //编程方式跳转到部门列表组件
+				this.axiosJSON.post("/customer/modify", this.customer).then(result=>{
+					
+					if(result.data.status.status == "OK"){
+						alert(result.data.status.message);
+						this.$router.push("/customer/list"); //编程方式跳转到部门列表组件
 					}
 					else{
-						alert(resultData.status.message);
+						alert(result.data.status.message);
 					}
 				});
 			}
-		}
-		
+		},			
 	}
 </script>
 
