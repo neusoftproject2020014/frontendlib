@@ -18,10 +18,9 @@
                     <nav id="site-nav" class="nav navbar-default">
                         <ul class="nav navbar-nav">
                             <li><a href="#" v-on:click="intercept('/')">主页</a></li>
-                            <li><a href="#" v-on:click="intercept('/')">酒店基础信息</a></li>
                             <li><a href="#" v-on:click="intercept('/room')">客房管理</a></li>
                             <li><a href="#" v-on:click="intercept('/customer')">房客管理</a></li>
-                            <li><a href="#" v-on:click="intercept('/')">消费管理</a></li>
+                            <li><a href="#" v-on:click="intercept('/product')">消费管理</a></li>
                             <li><a href="#" v-on:click="intercept('report')">报表</a></li>
                         </ul>
                     </nav>
@@ -73,38 +72,50 @@
 		        </button>
 		      </div>
 		      <div class="modal-body">
-				<form v-on:submit.prevent="handleForm()">
-					<div class="form-group row">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">用户名</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="input" placeholder="用户名"
-							 required v-model="userInfo.name">
-						</div>
-					</div>
-					
-					<div class="form-group row">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">密码</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="input" placeholder="密码"
-							 required v-model="userInfo.passwd">
-						</div>
-					</div>
-					<div class="form-group row" v-if="logining==false">
-						<label for="inputEmail3" class="col-sm-2 col-form-label">确认密码</label>
-						<div class="col-sm-4">
-							<input type="text" class="form-control" id="input" placeholder="确认密码" 
-							required v-model="confirmPasswd">
-						</div>
-					</div>
-					<div class="form-group row" >
-						<span class="text-danger">{{errorTip}}</span>
-					</div>
-					<div class="modal-footer">
-					  <button id="cancel" type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
-					  <button type="submit" class="btn btn-primary" v-if="logining">登陆</button>
-					  <button type="submit" class="btn btn-primary" v-else>注册</button>
-					</div>
-				</form>	
+				  <div v-if="loginFlag">
+					  <h3>您已经通过{{userInfo.name}}进行登陆</h3>
+					  <div class="modal-footer">
+					    <button id="cancel1" type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+						<button type="submit" class="btn btn-primary" v-on:click="logout()">退出</button>
+					    <button type="submit" class="btn btn-primary" v-on:click="destory()">注销</button>
+				
+					  </div>
+				  </div>
+				  <div v-else>
+					  <form v-on:submit.prevent="handleForm()">
+					  	<div class="form-group row">
+					  		<label for="inputEmail3" class="col-sm-2 col-form-label">用户名</label>
+					  		<div class="col-sm-4">
+					  			<input type="text" class="form-control" id="input" placeholder="用户名"
+					  			 required v-model="userInfo.name">
+					  		</div>
+					  	</div>
+					  	
+					  	<div class="form-group row">
+					  		<label for="inputEmail3" class="col-sm-2 col-form-label">密码</label>
+					  		<div class="col-sm-4">
+					  			<input type="text" class="form-control" id="input" placeholder="密码"
+					  			 required v-model="userInfo.passwd">
+					  		</div>
+					  	</div>
+					  	<div class="form-group row" v-if="logining==false">
+					  		<label for="inputEmail3" class="col-sm-2 col-form-label">确认密码</label>
+					  		<div class="col-sm-4">
+					  			<input type="text" class="form-control" id="input" placeholder="确认密码" 
+					  			required v-model="confirmPasswd">
+					  		</div>
+					  	</div>
+					  	<div class="form-group row" >
+					  		<span class="text-danger">{{errorTip}}</span>
+					  	</div>
+					  	<div class="modal-footer">
+					  	  <button id="cancel" type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+					  	  <button type="submit" class="btn btn-primary" v-if="logining">登陆</button>
+					  	  <button type="submit" class="btn btn-primary" v-else>注册</button>
+					  	</div>
+					  </form>	
+				  </div>
+				
 				
 		      </div>
 		     
@@ -179,12 +190,34 @@
 					if(result.data.status.status=="OK"){
 						this.logining=true;
 						alert(result.data.status.message);
+						document.getElementById("cancel1").click();
+						this.$router.push("/"); //编程方式跳转到部门列表组件
+						
 					}
 					else{
 						alert(result.data.status.message);
 					}
 				});
 				
+			},
+			destory(){
+				this.axiosJSON.post("/user/destory", this.userInfo).then(result=>{
+					if(result.data.status.status=="OK"){
+						this.loginFlag=false;
+						alert(result.data.status.message);
+						document.getElementById("cancel1").click();
+						this.$router.push("/"); //编程方式跳转到部门列表组件
+					}
+					else{
+						alert(result.data.status.message);
+					}
+				});
+			},
+			logout(){
+				this.loginFlag=false;
+				alert("退出成功");
+				document.getElementById("cancel1").click();
+				this.$router.push("/"); //编程方式跳转到部门列表组件
 			},
 			intercept(uri){
 				if(this.loginFlag || uri =='/'){

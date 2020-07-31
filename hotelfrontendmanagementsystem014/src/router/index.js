@@ -14,11 +14,13 @@ import RoomAdd from '../components/room/add.vue'
 import RoomModify from '../components/room/modify.vue'
 import RoomView from '../components/room/view.vue'
 
-import Product from '../components/product/product.vue'
 import ReportMain from '../components/reportform/report.vue'
 import ReportCheckInForm from '../components/reportform/checkinform.vue'
 import ReportCheckOutForm from '../components/reportform/checkoutform.vue'
 import ReportFinancialForm from '../components/reportform/financialform.vue'
+
+import ProductMain from '../components/product/product.vue'
+import ProductList from '../components/product/list.vue'
 
 Vue.use(VueRouter)
 
@@ -64,8 +66,19 @@ const routes = [
   },
   {
     path: '/product',
-    name: 'Product',
-    component: Product
+    name: 'Productmain',
+    component: ProductMain,
+	children:[
+		{
+			path:"list",
+			name:"productlist",
+			component:ProductList
+		},	
+		{
+			path:"", redirect: "list"
+		},
+		
+	]
   },
   {
     path: '/room',

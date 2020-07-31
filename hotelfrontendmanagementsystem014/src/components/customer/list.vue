@@ -16,7 +16,7 @@
 		   </thead>
 		   <tbody>
 		     <tr v-for="cstm in customerList" v-bind:key="cstm.id">
-		       <th scope="row">1</th>
+		       <th scope="row">{{$index}}</th>
 		       <td>{{cstm.name}}</td>
 		       <td>{{cstm.id}}</td>
 		       <td>{{cstm.gender}}</td>

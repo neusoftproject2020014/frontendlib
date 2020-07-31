@@ -16,7 +16,7 @@
 		      </thead>
 		      <tbody>
 		        <tr v-for="room in roomList" v-bind:key="room.rid">
-		          <th scope="row">1</th>
+		          <th scope="row">{{$index}}</th>
 		          <td>{{room.rid}}</td>
 		          <td>{{room.type}}</td>
 		          <td>{{room.floor}}</td>
