@@ -46,20 +46,20 @@
 				        <div class="form-group row">
 				            <label for="staticEmail" class="col-sm-3 col-form-label">房间楼层</label>
 				            <label for="staticEmail" class="col-sm-3 col-form-label">{{deletingRoom.floor}}</label>
-				         </div>
-								 <div class="form-group row">
-								     <label for="staticEmail" class="col-sm-3 col-form-label">房间号</label>
-								     <label for="staticEmail" class="col-sm-3 col-form-label">{{deletingRoom.rid}}</label>
-								  </div>
-								  <div class="form-group row">
-								      <label for="staticEmail" class="col-sm-3 col-form-label">房间类型</label>
-								      <label for="staticEmail" class="col-sm-3 col-form-label">{{deletingRoom.type}}</label>
-								   </div>
-				      </div>
+				        </div>
+							 <div class="form-group row">
+								 <label for="staticEmail" class="col-sm-3 col-form-label">房间号</label>
+								 <label for="staticEmail" class="col-sm-3 col-form-label">{{deletingRoom.rid}}</label>
+							  </div>
+							  <div class="form-group row">
+								  <label for="staticEmail" class="col-sm-3 col-form-label">房间类型</label>
+								  <label for="staticEmail" class="col-sm-3 col-form-label">{{deletingRoom.type}}</label>
+							   </div>
+						</div>
 				      <div class="modal-footer">
 				        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
 				        <button type="button" class="btn btn-primary" data-dismiss="modal"
-									v-on:click="roomDelete()">确定退房</button>
+									v-on:click="roomDelete()">确定删除</button>
 				      </div>
 				    </div>
 				  </div>

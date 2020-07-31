@@ -20,7 +20,7 @@
                             <li><a href="#" v-on:click="intercept('/')">主页</a></li>
                             <li><a href="#" v-on:click="intercept('/room')">客房管理</a></li>
                             <li><a href="#" v-on:click="intercept('/customer')">房客管理</a></li>
-                            <li><a href="#" v-on:click="intercept('/product')">消费管理</a></li>
+                            <li><a href="#" v-on:click="intercept('/product')">商品管理</a></li>
                             <li><a href="#" v-on:click="intercept('report')">报表</a></li>
                         </ul>
                     </nav>
@@ -94,14 +94,14 @@
 					  	<div class="form-group row">
 					  		<label for="inputEmail3" class="col-sm-2 col-form-label">密码</label>
 					  		<div class="col-sm-4">
-					  			<input type="text" class="form-control" id="input" placeholder="密码"
+					  			<input type="password" class="form-control" id="input" placeholder="密码"
 					  			 required v-model="userInfo.passwd">
 					  		</div>
 					  	</div>
 					  	<div class="form-group row" v-if="logining==false">
 					  		<label for="inputEmail3" class="col-sm-2 col-form-label">确认密码</label>
 					  		<div class="col-sm-4">
-					  			<input type="text" class="form-control" id="input" placeholder="确认密码" 
+					  			<input type="password" class="form-control" id="input" placeholder="确认密码" 
 					  			required v-model="confirmPasswd">
 					  		</div>
 					  	</div>

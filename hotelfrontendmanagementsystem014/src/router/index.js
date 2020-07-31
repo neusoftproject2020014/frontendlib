@@ -21,6 +21,8 @@ import ReportFinancialForm from '../components/reportform/financialform.vue'
 
 import ProductMain from '../components/product/product.vue'
 import ProductList from '../components/product/list.vue'
+import ProductAdd from '../components/product/add.vue'
+import ProductModify from '../components/product/modify.vue'
 
 Vue.use(VueRouter)
 
@@ -77,7 +79,17 @@ const routes = [
 		{
 			path:"", redirect: "list"
 		},
-		
+		{
+			path:"add",
+			name:"productadd",
+			component:ProductAdd
+		},
+		{
+			path:"modify/:pid",
+			name:"productmodify",
+			component:ProductModify,
+			props:true
+		},
 	]
   },
   {
