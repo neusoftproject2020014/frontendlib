@@ -8,9 +8,17 @@ import CustomerCheckIn from '../components/customer/checkin.vue'
 import CustomerModify from '../components/customer/modify.vue'
 import CustomerView from '../components/customer/view.vue'
 
+import RoomMain from '../components/room/room.vue'
+import RoomList from '../components/room/list.vue'
+import RoomAdd from '../components/room/add.vue'
+import RoomModify from '../components/room/modify.vue'
+import RoomView from '../components/room/view.vue'
+
 import Product from '../components/product/product.vue'
-import Room from '../components/room/room.vue'
-import ReportForm from '../components/reportform/reportform.vue'
+import ReportMain from '../components/reportform/report.vue'
+import ReportCheckInForm from '../components/reportform/checkinform.vue'
+import ReportCheckOutForm from '../components/reportform/checkoutform.vue'
+import ReportFinancialForm from '../components/reportform/financialform.vue'
 
 Vue.use(VueRouter)
 
@@ -61,14 +69,62 @@ const routes = [
   },
   {
     path: '/room',
-    name: 'Room',
-    component: Room
+    name: 'roommain',
+    component: RoomMain,
+  	children:[
+  		{
+  			path:"list",
+  			name:"roomlist",
+  			component:RoomList
+  		},
+  		{
+  			path:"add",
+  			name:"roomadd",
+  			component:RoomAdd
+  		},
+		{
+			path:"modify/:rid",
+			name:"roommodify",
+			component:RoomModify,
+			props:true
+		},
+		{
+			path:"view/:rid",
+			name:"roomview",
+			component:RoomView
+		},
+  		{
+  			path:"", redirect: "list"
+  		},
+  		
+  	]
   },
   {
-    path: '/reportform',
-    name: 'ReportForm',
-    component: ReportForm
-  }
+    path: '/report',
+    name: 'reportmain',
+    component: ReportMain,
+  	children:[
+  		{
+  			path:"checkinform",
+  			name:"reportcheckinform",
+  			component:ReportCheckInForm
+  		},
+		{
+			path:"checkoutform",
+			name:"reportcheckoutform",
+			component:ReportCheckOutForm
+		},
+		{
+			path:"financialform",
+			name:"reportfinancialform",
+			component:ReportFinancialForm
+		},  		
+  		{
+  			path:"", redirect: "checkinform"
+  		},
+  		
+  	]
+  },
 ]
 
 const router = new VueRouter({
